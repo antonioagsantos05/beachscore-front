@@ -54,7 +54,7 @@ const JogoDetalhes = () => {
 
   useEffect(() => {
     fetchPartidaDetalhes(); // Chama a função ao montar o componente
-  }, [id]);
+  }, [id, fetchPartidaDetalhes]);
 
   if (!partida) {
     return <div>Carregando...</div>;

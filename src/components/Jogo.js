@@ -43,7 +43,7 @@ const Jogo = () => {
 
   useEffect(() => {
     fetchPartida(); 
-  }, [id]);
+  }, [id, fetchPartida]);
 
   const handleClickQuadra = (area) => {
     setBotaoQuadra(area); // Salva o nome do botão da quadra
