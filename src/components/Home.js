@@ -1,5 +1,6 @@
 // src/components/Home.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { FaUsers, FaGamepad, FaTrophy, FaSignOutAlt } from 'react-icons/fa';
 
