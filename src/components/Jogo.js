@@ -9,10 +9,10 @@ const Jogo = () => {
   const { id } = useParams(); 
   const navigate = useNavigate(); 
   const [partida, setPartida] = useState(null); 
-  const [pontuacao, setPontuacao] = useState({
-    dupla1: { pontos: 0, games: 0, sets: 0, vantagem: false, tiebreak: false, tiebreakPontos: 0 },
-    dupla2: { pontos: 0, games: 0, sets: 0, vantagem: false, tiebreak: false, tiebreakPontos: 0 },
-  });
+  // const [pontuacao, setPontuacao] = useState({
+  //   dupla1: { pontos: 0, games: 0, sets: 0, vantagem: false, tiebreak: false, tiebreakPontos: 0 },
+  //   dupla2: { pontos: 0, games: 0, sets: 0, vantagem: false, tiebreak: false, tiebreakPontos: 0 },
+  // });
 
   const [showModal, setShowModal] = useState(false);
   const [tipoMovimento, setTipoMovimento] = useState(''); 
@@ -127,8 +127,8 @@ const Jogo = () => {
   };
   
 
-  const dupla1Jogadores = partida.jogadores.filter(j => j.dupla === 1).map(j => j.nome).join(' / ');
-  const dupla2Jogadores = partida.jogadores.filter(j => j.dupla === 2).map(j => j.nome).join(' / ');
+  // const dupla1Jogadores = partida.jogadores.filter(j => j.dupla === 1).map(j => j.nome).join(' / ');
+  // const dupla2Jogadores = partida.jogadores.filter(j => j.dupla === 2).map(j => j.nome).join(' / ');
 
   return (
     <div className="container text-center">

@@ -12,6 +12,7 @@ import PartidasFinalizadas from './components/PartidasFinalizadas'; // Correto: 
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  console.log(isAuthenticated)
 
   const handleLogin = () => {
     setIsAuthenticated(true);
