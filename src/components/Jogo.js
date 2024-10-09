@@ -22,28 +22,29 @@ const Jogo = () => {
   const [jogadoresAtivos, setJogadoresAtivos] = useState(false); // Estado para ativar/desativar botões de jogadores
 
   // Função para buscar a partida
-  const fetchPartida = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Token não encontrado');
-      }
-
-      const response = await axios.get(`https://beachscore-backend.azurewebsites.net/api/partidas/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setPartida(response.data); 
-    } catch (error) {
-      console.error('Erro ao buscar a partida:', error);
-      alert(error.response?.data?.message || 'Erro ao buscar a partida.');
-    }
-  };
-
   useEffect(() => {
-    fetchPartida(); 
-  }, [id, fetchPartida]);
+    const fetchPartida = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token não encontrado');
+        }
+  
+        const response = await axios.get(`https://beachscore-backend.azurewebsites.net/api/partidas/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setPartida(response.data); 
+      } catch (error) {
+        console.error('Erro ao buscar a partida:', error);
+        alert(error.response?.data?.message || 'Erro ao buscar a partida.');
+      }
+    };
+  
+    fetchPartida();  // Chama a função ao carregar o componente ou quando o id muda
+  }, [id]);  // O useEffect depende apenas do id
+  
 
   const handleClickQuadra = (area) => {
     setBotaoQuadra(area); // Salva o nome do botão da quadra

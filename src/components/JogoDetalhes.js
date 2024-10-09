@@ -11,50 +11,51 @@ const JogoDetalhes = () => {
   const [movimentos, setMovimentos] = useState([]); // Para armazenar movimentos por jogador
   const [sets, setSets] = useState([]); // Para armazenar os sets
 
-  const fetchPartidaDetalhes = async () => {
-    try {
-      const token = localStorage.getItem('token'); // Pegando o token do localStorage
-      if (!token) {
-        throw new Error('Token não encontrado');
-      }
-
-      // Busca os dados da partida
-      const partidaResponse = await axios.get(`https://beachscore-backend.azurewebsites.net/api/partidas/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setPartida(partidaResponse.data); // Armazenando dados da partida
-
-      // Busca os sets da partida
-      const setsResponse = await axios.get(`https://beachscore-backend.azurewebsites.net/api/sets/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setSets(setsResponse.data); // Armazenando sets
-
-      // Busca as estatísticas dos movimentos de todos os jogadores na partida
-      const movimentosPromises = partidaResponse.data.jogadores.map((jogador) =>
-        axios.get(`https://beachscore-backend.azurewebsites.net/api/estatisticas/${id}/${jogador.id}`, {
+  useEffect(() => {
+    const fetchPartidaDetalhes = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Pegando o token do localStorage
+        if (!token) {
+          throw new Error('Token não encontrado');
+        }
+  
+        // Busca os dados da partida
+        const partidaResponse = await axios.get(`https://beachscore-backend.azurewebsites.net/api/partidas/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        })
-      );
-
-      const movimentosResponses = await Promise.all(movimentosPromises);
-      const movimentosData = movimentosResponses.map((res) => res.data);
-      setMovimentos(movimentosData); // Armazenando estatísticas de movimentos
-    } catch (error) {
-      console.error('Erro ao buscar detalhes da partida:', error);
-      alert(error.response?.data?.message || 'Erro ao buscar detalhes da partida.');
-    }
-  };
-
-  useEffect(() => {
-    fetchPartidaDetalhes(); // Chama a função ao montar o componente
-  }, [id, fetchPartidaDetalhes]);
+        });
+        setPartida(partidaResponse.data); // Armazenando dados da partida
+  
+        // Busca os sets da partida
+        const setsResponse = await axios.get(`https://beachscore-backend.azurewebsites.net/api/sets/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setSets(setsResponse.data); // Armazenando sets
+  
+        // Busca as estatísticas dos movimentos de todos os jogadores na partida
+        const movimentosPromises = partidaResponse.data.jogadores.map((jogador) =>
+          axios.get(`https://beachscore-backend.azurewebsites.net/api/estatisticas/${id}/${jogador.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+        );
+  
+        const movimentosResponses = await Promise.all(movimentosPromises);
+        const movimentosData = movimentosResponses.map((res) => res.data);
+        setMovimentos(movimentosData); // Armazenando estatísticas de movimentos
+      } catch (error) {
+        console.error('Erro ao buscar detalhes da partida:', error);
+        alert(error.response?.data?.message || 'Erro ao buscar detalhes da partida.');
+      }
+    };
+  
+    fetchPartidaDetalhes(); // Chama a função ao carregar o componente ou quando o id muda
+  }, [id]); // O useEffect depende apenas do id
+  
 
   if (!partida) {
     return <div>Carregando...</div>;
