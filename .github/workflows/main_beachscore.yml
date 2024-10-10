@@ -27,6 +27,9 @@ jobs:
           npm run build --if-present
           npm run test --if-present -- --passWithNoTests
 
+      - name: List build directory
+        run: ls -la ./build
+
       - name: Zip artifact for deployment
         run: zip -r release.zip ./build
 
@@ -43,7 +46,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -67,4 +70,4 @@ jobs:
         with:
           app-name: 'beachscore'
           slot-name: 'Production'
-          package: ./build
+          package: release.zip  # Usar o arquivo zip diretamente para deploy
