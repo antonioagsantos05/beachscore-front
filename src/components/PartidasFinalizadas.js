@@ -52,6 +52,10 @@ const PartidasFinalizadas = () => {
     return <div>Carregando...</div>; // Exibe uma mensagem de carregamento
   }
 
+  const handleGoHome = () => {
+    navigate('/home');
+  };
+
   return (
     <div className="container mt-4 text-center">
       <h1>Partidas Finalizadas</h1>
@@ -72,6 +76,12 @@ const PartidasFinalizadas = () => {
             </div>
           </Button>
         ))}
+      </div>
+            {/* Botão Voltar para Home */}
+            <div className="mb-3 text-center">
+        <Button variant="primary" onClick={handleGoHome} style={{ borderWidth: '2px', marginRight: '10px' }}>
+          Voltar para Home
+        </Button>
       </div>
     </div>
   );

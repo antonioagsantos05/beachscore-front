@@ -1,16 +1,14 @@
 .quadra {
     display: grid;
-    grid-template-columns: 0.8fr repeat(3, 1fr) 0.8fr;
-    grid-template-rows: 0.6fr repeat(5, 1fr) 0.6fr;
-    gap: 2px;
+    grid-template-columns: 1fr repeat(7, 1fr);
+    grid-template-rows: 1fr repeat(5, 1fr);
+    gap: 1px;
     grid-template-areas:
-      "Fora-Fundo Fora-Cima Fora-Cima Fora-Cima Rede"
-      "Fora-Fundo Vermelho5 Amarelo5 Verde5 Rede"
-      "Fora-Fundo Vermelho4 Amarelo4 Verde4 Rede"
-      "Fora-Fundo Vermelho3 Amarelo3 Verde3 Rede"
-      "Fora-Fundo Vermelho2 Amarelo2 Verde2 Rede"
-      "Fora-Fundo Vermelho1 Amarelo1 Verde1 Rede"
-      "Fora-Fundo Fora-Baixo Fora-Baixo Fora-Baixo Rede";
+    "Fora-Fundo Fora-Fundo Fora-Fundo Fora-Fundo Fora-Fundo Fora-Fundo Fora-Fundo"
+    "Fora-Esquerda Vermelho1 Vermelho2 Vermelho3 Vermelho4 Vermelho5 Fora-Direita"
+    "Fora-Esquerda Amarelo1 Amarelo2 Amarelo3 Amarelo4 Amarelo5 Fora-Direita"
+    "Fora-Esquerda Verde1 Verde2 Verde3 Verde4 Verde5 Fora-Direita"
+    "Rede Rede Rede Rede Rede Rede Rede"; 
 
   }
   
@@ -29,13 +27,13 @@
     background-color: #9afff7;
   }
   
-  .Fora-Cima {
-    grid-area: Fora-Cima;
+  .Fora-Esquerda {
+    grid-area: Fora-Esquerda;
     background-color: #9afff7;
   }
   
-  .Fora-Baixo {
-    grid-area: Fora-Baixo;
+  .Fora-Direita {
+    grid-area: Fora-Direita;
     background-color: #9afff7;
   }
   
@@ -80,16 +78,23 @@
     opacity: 0.8;
   }
   
-  /* Responsividade para telas menores */
-  @media (max-width: 768px) {
-    .container {
-      grid-template-columns: 0.6fr repeat(3, 1fr) 0.6fr;
-      grid-template-rows: 0.5fr repeat(5, 1fr) 0.5fr;
-    }
-  
-    button {
-      font-size: 14px;
-      padding: 8px;
-    }
+
+
+/* Responsividade para telas menores (celulares) */
+@media (max-width: 576px) {
+  .quadra {
+    width: 100vw; /* A largura da quadra ocupa toda a largura da viewport */
+    height: 55vh; /* A altura da quadra ocupa toda a altura da viewport */
+    grid-template-columns: 1fr repeat(7, 1fr); /* Mantém a estrutura das colunas */
+    grid-template-rows: 1fr repeat(5, 1fr); /* Mantém as linhas, mas ajusta a proporção */
+  }
+
+  button {
+    font-size: 10px; /* Reduz o tamanho da fonte para telas menores */
+    padding: 4px;    /* Ajusta o padding dos botões */
   }
   
+  .quadra button {
+    height: calc(auto / 6); /* Cada botão ajusta sua altura em função da altura da viewport */
+  }
+}

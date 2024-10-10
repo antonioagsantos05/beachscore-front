@@ -77,6 +77,7 @@ const Jogo = () => {
         jogadorId: jogadorSelecionado.id, 
         tipoMovimento,
         resultado,
+        area: botaoQuadra // Envia a área da quadra onde o movimento ocorreu
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -137,8 +138,8 @@ const Jogo = () => {
       <div className="quadra mb-4">
         {/* Botões da quadra */}
         <button className="Fora-Fundo" onClick={() => handleClickQuadra('Fora-Fundo')}>Fora-Fundo</button>
-        <button className="Fora-Cima" onClick={() => handleClickQuadra('Fora-Cima')}>Fora-Cima</button>
-        <button className="Fora-Baixo" onClick={() => handleClickQuadra('Fora-Baixo')}>Fora-Baixo</button>
+        <button className="Fora-Direita" onClick={() => handleClickQuadra('Fora-Direita')}>Fora-Direita</button>
+        <button className="Fora-Esquerda" onClick={() => handleClickQuadra('Fora-Esquerda')}>Fora-Esquerda</button>
         <button className="Rede" onClick={() => handleClickQuadra('Rede')}>Rede</button>
         <button className="Vermelho1" onClick={() => handleClickQuadra('Vermelha 1')}>Vermelha 1</button>
         <button className="Vermelho2" onClick={() => handleClickQuadra('Vermelha 2')}>Vermelha 2</button>
